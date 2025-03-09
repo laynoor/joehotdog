@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name='viewport' content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Joe's Hotdogs</title>
+    <link rel="stylesheet" type = "text/css" href="styles.css">
+</head>
+<body>
+    <h1>Joe's Hotdog Stand</h1>
+     
+
+    <script>
+    const hotdogs = 4.99;
+    const french_fries = 3.99;
+    const drinks = 1.79;
+
+    let numDogs = prompt("How many hotdogs do you want?");
+    let numFries = prompt("How many fries do you wamt?");
+    let numSoda = prompt("How many sodas do you want?");
+
+
+    /*
+    * parameter = number
+    * return = rounded number in the form of a string 
+    * 
+    */
+    function showMoney(number){
+        round = Math.round(number*100)/100;
+        char_arr = round.toString().split("."); 
+
+        if (char_arr.length == 1) {
+            char_arr[0] +=  ".00";
+        }
+
+        else if (char_arr[1].length == 1) {
+            char_arr[1] +=  "0";
+        }
+        return char_arr.join(".");
+
+    }
+
+    document.write("Order detail:");
+    document.write("<br>");
+ 
+    document.write (numDogs + " hotdogs = $" + showMoney(hotdogs * numDogs));
+    document.write("<br>");
+    document.write (numFries + " fries = $" + showMoney(french_fries * numFries)); 
+    document.write("<br>");
+    document.write (numSoda + " sodas = $" + showMoney(drinks * numSoda));
+    document.write("<br>");
+    varSubtotal = (drinks * numSoda) + (french_fries * numFries) + (hotdogs * numDogs);
+    document.write("The subtotal is: $" + showMoney(varSubtotal));
+    document.write("<br>");
+
+    if (showMoney(varSubtotal) >= 30) {
+        var discount = showMoney(varSubtotal * 0.1);
+    }  else {
+        var discount = 0;
+    } 
+    document.write("<br>");
+
+    document.write("The discount is: $" + discount);
+    document.write("<br>");
+    varSubtotal = varSubtotal - discount;
+    document.write("The new subtotal is: $" + showMoney(varSubtotal));
+    document.write("<br>");
+
+    var tax = varSubtotal * 0.0625;
+    // varSubtotal = tax + varSubtotal;
+
+    document.write("The tax amount is: $" + showMoney(tax));
+    document.write("<br>");
+    document.write("The final total is: $" + showMoney(parseFloat(varSubtotal + tax)));
+
+    
+    </script>
